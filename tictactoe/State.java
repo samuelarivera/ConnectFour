@@ -15,7 +15,10 @@ public class State
     public int rowSaver = 0;
     public int colSaver = 0;
     public boolean isWinner() {
-        int slopeSize = 0;
+        int slopeSize = 0;// create two variables representing the row and col 
+        //saver, which go down nutil one reaches 0. then, add one to each until
+        // the row one is ewual to sic or the col one is equal to seven
+        
         for (int row=0; row<Constants.BOARD_SIZE; row++) {
             colCheck[row] = getBoardCell(row, colSaver);
         }
@@ -32,6 +35,7 @@ public class State
              return true;   
             }
         }
+        
         return false;
     }
 
