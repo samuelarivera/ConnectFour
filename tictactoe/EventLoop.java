@@ -29,16 +29,16 @@ public class EventLoop {
     
       } else if (gameState == Constants.GET_X_MOVE) {
           ui.printBoard(state);
-        row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName());
         col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
+        row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName());
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }
 
       } else if (gameState == Constants.GET_O_MOVE) {
-          ui.printBoard(state);
-         row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName());
+        ui.printBoard(state);
         col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
+        row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName());
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }
@@ -46,6 +46,8 @@ public class EventLoop {
       } else if (gameState == Constants.MAKE_MOVE) {
         ui.printMove(state, row, col);
         state.setBoardCell(row, col, state.getWhoseMove());
+        state.rowSaver = row;
+        state.colSaver = col;
         state.setGameState(Constants.CHECK_IF_WINNER);
 
       } else if (gameState == Constants.CHECK_IF_WINNER) {

@@ -9,22 +9,29 @@ public class State
     private int whoseMove = Constants.X;
     private String xName = "";
     private String oName = "";
-    private int[][] board = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE];
-
+    private int[][] board = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE + 1];
+    private int[] rowCheck = new int[Constants.BOARD_SIZE + 1];
+    private int[]colCheck = new int[Constants.BOARD_SIZE];
+    public int rowSaver = 0;
+    public int colSaver = 0;
     public boolean isWinner() {
-        int total;
+        int slopeSize = 0;
         for (int row=0; row<Constants.BOARD_SIZE; row++) {
-            total = getBoardCell(row, 0) + getBoardCell(row,1) + getBoardCell(row,2);
-            if (total == -3 || total == 3) return true;
+            colCheck[row] = getBoardCell(row, colSaver);
         }
-        for (int col=0; col<Constants.BOARD_SIZE; col++) {
-            total = getBoardCell(0, col) + getBoardCell(1,col) + getBoardCell(2, col);
-            if (total == -3 || total == 3) return true;
+        for (int col=0; col<Constants.BOARD_SIZE + 1; col++) {
+            rowCheck[col] = getBoardCell(rowSaver,col);
+        } 
+        for(int indexCol = 0; indexCol < Constants.BOARD_SIZE - 4; indexCol++){
+            if(colCheck[indexCol] + colCheck[indexCol + 1] + colCheck[indexCol + 2] + colCheck[indexCol + 3]  == (4*this.getWhoseMove())){
+             return true;   
+            }
         }
-        total = getBoardCell(0, 0) + getBoardCell(1,1) + getBoardCell(2, 2);
-        if (total == -3 || total == 3) return true;
-        total = getBoardCell(2, 0) + getBoardCell(1,1) + getBoardCell(0, 2);
-        if (total == -3 || total == 3) return true;
+        for(int indexRow = 0; indexRow < Constants.BOARD_SIZE - 3; indexRow++){
+            if(rowCheck[indexRow] + rowCheck[indexRow + 1] + rowCheck[indexRow + 2] + rowCheck[indexRow + 3]  == (4*this.getWhoseMove())){
+             return true;   
+            }
+        }
         return false;
     }
 
