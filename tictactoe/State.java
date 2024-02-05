@@ -12,12 +12,13 @@ public class State
     private int[][] board = new int[Constants.BOARD_SIZE][Constants.BOARD_SIZE + 1];
     private int[] rowCheck = new int[Constants.BOARD_SIZE + 1];
     private int[]colCheck = new int[Constants.BOARD_SIZE];
+    private int[] slopeCheck = new int[Constants.BOARD_SIZE];
     public int rowSaver = 0;
     public int colSaver = 0;
     public boolean isWinner() {
         int slopeSize = 0;// create two variables representing the row and col 
         //saver, which go down nutil one reaches 0. then, add one to each until
-        // the row one is ewual to sic or the col one is equal to seven
+        // the row one is equal to six or the col one is equal to seven
         
         for (int row=0; row<Constants.BOARD_SIZE; row++) {
             colCheck[row] = getBoardCell(row, colSaver);
@@ -25,17 +26,35 @@ public class State
         for (int col=0; col<Constants.BOARD_SIZE + 1; col++) {
             rowCheck[col] = getBoardCell(rowSaver,col);
         } 
-        for(int indexCol = 0; indexCol < Constants.BOARD_SIZE - 4; indexCol++){
-            if(colCheck[indexCol] + colCheck[indexCol + 1] + colCheck[indexCol + 2] + colCheck[indexCol + 3]  == (4*this.getWhoseMove())){
-             return true;   
-            }
-        }
         for(int indexRow = 0; indexRow < Constants.BOARD_SIZE - 3; indexRow++){
             if(rowCheck[indexRow] + rowCheck[indexRow + 1] + rowCheck[indexRow + 2] + rowCheck[indexRow + 3]  == (4*this.getWhoseMove())){
              return true;   
             }
         }
-        
+        int col= colSaver;
+        int row = rowSaver;
+        int forLooper = 0;
+        while(col > 0 && row > 0){
+            col = col - 1;
+            row = row -1;
+        }
+        while(col < Constants.BOARD_SIZE + 1 && row < Constants.BOARD_SIZE){
+            slopeCheck[forLooper] = getBoardCell(row, col);
+            col =  col + 1;
+            col = col + 1;
+            forLooper = forLooper + 1;
+        }
+        if(arrayCheck(rowCheck) == true || arrayCheck(colCheck) == true || arrayCheck(slopeCheck) == true){
+            return true;
+        }
+        return false;
+    }
+    public boolean arrayCheck(int[] numb){
+        for(int i = 0; i < numb.length - 3; i ++){
+            if(numb[i] + numb[i + 1] + numb[i + 2] + numb[i + 3]  == (4 * this.getWhoseMove())){
+             return true;   
+            }
+        }
         return false;
     }
 

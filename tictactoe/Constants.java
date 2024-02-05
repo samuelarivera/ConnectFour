@@ -9,7 +9,7 @@ package tictactoe;
  */
 public class Constants
 {
-    public static final int BOARD_SIZE = 3;
+    public static final int BOARD_SIZE = 6;
   // Valid board values
     public static final int X = -1;    // Indicates an "X"
     public static final int O = 1;     // Indicates an "O"
