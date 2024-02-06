@@ -36,23 +36,9 @@ public class UI
         return scanner.next();
     }
 
-    public int getMoveRow(int whoseMove, String xName, String oName) {
+    public int getMoveRow(int whoseMove, String xName, String oName, int col) {
         int row = 0;
-        int checkRow = 1;
-        try {
-            while (row <= 0 || row > Constants.BOARD_SIZE) {
-                System.out.printf(Constants.GET_ROW_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
-                checkRow = scanner.nextInt();
-                if (checkRow < 1 || checkRow > 3) {
-                    System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-                }
-                row = checkRow;
-            }
-            return row;
-        }catch(InputMismatchException e){
-            System.out.println(Constants.INVALID_ROW_OR_COLUMN);
-            scanner.next();
-        }
+        row = 
         return row;
     }
 
