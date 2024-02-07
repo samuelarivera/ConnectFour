@@ -6,7 +6,7 @@ public class EventLoop {
   State state = new State();
   UI ui = new UI();
   int row, col;
-  int[] rowStatus = new int[Constants.BOARD_SIZE];
+  int[] rowStatus = new int[Constants.BOARD_SIZE + 1];
   
   public static void main(String[] args){
       EventLoop eventLoop = new EventLoop();
@@ -16,12 +16,11 @@ public class EventLoop {
   public void run() {
     while (state.getGameState() != Constants.QUIT_PROGRAM) {
       int gameState = state.getGameState();
-      for(int i = 0; i < 6; i++){
-           rowStatus[i] = Constants.BOARD_SIZE;  
-      }
       if (gameState == Constants.STANDBY) {
         state.setGameState(Constants.GET_X_NAME);
-
+        for(int i = 0; i < Constants.BOARD_SIZE + 1; i++){
+           rowStatus[i] = Constants.BOARD_SIZE;  
+      }
       } else if (gameState == Constants.GET_X_NAME) {
         state.setXName(ui.promptForName("X"));
         state.setGameState(Constants.GET_O_NAME);
@@ -33,7 +32,7 @@ public class EventLoop {
       } else if (gameState == Constants.GET_X_MOVE) {
           ui.printBoard(state);
         col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
-        row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName());
+        row = ui.getMoveRow(col, rowStatus);
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }
@@ -41,7 +40,7 @@ public class EventLoop {
       } else if (gameState == Constants.GET_O_MOVE) {
         ui.printBoard(state);
         col = ui.getMoveCol(state.getWhoseMove(), state.getXName(), state.getOName());
-        row = ui.getMoveRow(state.getWhoseMove(), state.getXName(), state.getOName(), col, rowStatus[]);
+        row = ui.getMoveRow(col, rowStatus);
         if (ui.isLegalMove(state, row, col)) {
           state.setGameState(Constants.MAKE_MOVE);
         }

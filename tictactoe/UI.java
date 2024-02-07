@@ -36,9 +36,9 @@ public class UI
         return scanner.next();
     }
 
-    public int getMoveRow(int whoseMove, String xName, String oName, int col) {
-        int row = 0;
-        row = 
+    public int getMoveRow(int col, int[] rowStatus) {
+        rowStatus[col - 1] = rowStatus[col - 1] - 1;
+        int row = rowStatus[col - 1];
         return row;
     }
 
@@ -75,7 +75,10 @@ public class UI
     public void printBoard(State state) {
         System.out.println(Constants.DIVIDER_STRING);
         for (int row = 0; row < Constants.BOARD_SIZE; row++) {
-            System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row, 0)), getXOrO(state.getBoardCell(row, 1)), getXOrO(state.getBoardCell(row, 2)));
+            System.out.printf(Constants.BOARD_STRING, getXOrO(state.getBoardCell(row, 0)), getXOrO(state.getBoardCell(row, 1)),
+            getXOrO(state.getBoardCell(row, 2)), getXOrO(state.getBoardCell(row, 3)), 
+            getXOrO(state.getBoardCell(row, 4)), getXOrO(state.getBoardCell(row, 5)),
+            getXOrO(state.getBoardCell(row, 6)));
             System.out.println();
         }
         System.out.println(Constants.DIVIDER_STRING);
