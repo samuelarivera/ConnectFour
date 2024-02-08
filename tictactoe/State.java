@@ -27,11 +27,6 @@ public class State
         for (int col=0; col<Constants.BOARD_SIZE + 1; col++) {
             rowCheck[col] = getBoardCell(rowSaver,col);
         } 
-        for(int indexRow = 0; indexRow < Constants.BOARD_SIZE - 3; indexRow++){
-            if(rowCheck[indexRow] + rowCheck[indexRow + 1] + rowCheck[indexRow + 2] + rowCheck[indexRow + 3]  == (4*this.getWhoseMove())){
-                return true;   
-            }
-        }
         slopeCheck = setSlopeCheck(slopeCheck, 1);
         invSlopeCheck = setSlopeCheck(invSlopeCheck, -1);
         if(arrayCheck(rowCheck) == true || arrayCheck(colCheck) == true || arrayCheck(slopeCheck) == true || arrayCheck(invSlopeCheck) == true){
@@ -48,18 +43,18 @@ public class State
                 col = col - 1;
                 row = row -1;
             }
-            while(col < Constants.BOARD_SIZE + 1 && row < Constants.BOARD_SIZE){
+            while(col < Constants.BOARD_SIZE && row < Constants.BOARD_SIZE - 1){
                 slopeCheck[forLooper] = getBoardCell(row, col);
                 col =  col + 1;
                 row = row + 1;
                 forLooper = forLooper + 1;
             }
         }else{
-            while(col > 0 && row < 6){
+            while(col > 0 && row < Constants.BOARD_SIZE - 1){
                 col = col - 1;
                 row = row + 1;
             }
-            while(col < Constants.BOARD_SIZE + 1 && row > 0){
+            while(col < Constants.BOARD_SIZE && row > 0){
                 slopeCheck[forLooper] = getBoardCell(row, col);
                 col =  col + 1;
                 row = row + 1;
