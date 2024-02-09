@@ -57,7 +57,7 @@ public class State
             while(col < Constants.BOARD_SIZE && row > 0){
                 slopeCheck[forLooper] = getBoardCell(row, col);
                 col =  col + 1;
-                row = row + 1;
+                row = row - 1;
                 forLooper = forLooper + 1;
             }
         }
@@ -124,7 +124,7 @@ public class State
     }
 
     public void setBoardCell(int row, int col, int value) {
-        this.board[row-1][col-1] = value;
+        this.board[row][col-1] = value;
     }
 }
 

@@ -46,7 +46,7 @@ public class EventLoop {
         }
 
       } else if (gameState == Constants.MAKE_MOVE) {
-        ui.printMove(state, row, col);
+        ui.printMove(state, col);
         state.setBoardCell(row, col, state.getWhoseMove());
         state.rowSaver = row;
         state.colSaver = col;
@@ -88,6 +88,11 @@ public class EventLoop {
         if (ui.startNewGame() == true) {
 
           state.setGameState(Constants.STANDBY);
+          for(int i = 0; i < Constants.BOARD_SIZE; i ++){
+              for( int col = 0; col < Constants.BOARD_SIZE + 1; col ++){
+                  state.setBoardCell(i ,col + 1, 0);
+              }
+          }
         } else {
          state.setGameState(Constants.QUIT_PROGRAM);
         }

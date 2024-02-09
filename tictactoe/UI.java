@@ -25,9 +25,9 @@ public class UI
     }
 
     public boolean isLegalMove(State state, int row, int col) {
-        return 1 <= (row) && (row) <= Constants.BOARD_SIZE && //setBoardCell in state subtracts 1 from row and column for index
-        1 <= (col) && (col) <= Constants.BOARD_SIZE &&          // + 1 at the end adds the 1 back
-        state.getBoardCell(row - 1,col - 1) == Constants.BLANK;
+        return 0 <= (row) && (row) <= Constants.BOARD_SIZE && //setBoardCell in state subtracts 1 from row and column for index
+        1 <= (col) && (col) <= Constants.BOARD_SIZE + 1 &&          // + 1 at the end adds the 1 back
+        state.getBoardCell(row ,col - 1) == Constants.BLANK;
     }
 
     // Prompt for input methods
@@ -49,7 +49,7 @@ public class UI
             while (col <= 0 || col > Constants.BOARD_SIZE) {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 checkCol = scanner.nextInt();
-                if (checkCol < 1 || checkCol > 3) {
+                if (checkCol < 1 || checkCol > Constants.BOARD_SIZE + 1) {
                     System.out.println(Constants.INVALID_ROW_OR_COLUMN);
                 }
                 col = checkCol;
@@ -92,8 +92,8 @@ public class UI
         System.out.printf(Constants.INVALID_MOVE_ERROR, row, col);
     }
 
-    public void printMove(State state, int row, int col) {
-        System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), row, col);
+    public void printMove(State state, int col) {
+        System.out.printf(Constants.PRINT_MOVE, getXOrO(state.getWhoseMove()), getPlayerName(state.getWhoseMove(), state.getXName(), state.getOName()), col);
         System.out.println();
     } 
 
