@@ -49,14 +49,16 @@ public class EventLoop {
         ui.printMove(state, col);
         state.setBoardCell(row, col, state.getWhoseMove());
         state.rowSaver = row;
-        state.colSaver = col;
+        state.colSaver = col - 1;
         state.setGameState(Constants.CHECK_IF_WINNER);
 
       } else if (gameState == Constants.CHECK_IF_WINNER) {
         if (state.isWinner()) {
           if (state.getWhoseMove() == Constants.X) {
-            state.setGameState(Constants.X_WINS);
+              ui.printBoard(state);
+              state.setGameState(Constants.X_WINS);
           } else {
+              ui.printBoard(state);
             state.setGameState(Constants.O_WINS);
           }
         } else {
