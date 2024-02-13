@@ -17,10 +17,7 @@ public class State
     public int rowSaver = 0;
     public int colSaver = 0;
     public boolean isWinner() {
-        int slopeSize = 0;// create two variables representing the row and col 
-        //saver, which go down nutil one reaches 0. then, add one to each until
-        // the row one is equal to six or the col one is equal to seven
-
+        int slopeSize = 0;
         for (int row=0; row<Constants.BOARD_SIZE; row++) {
             colCheck[row] = getBoardCell(row, colSaver);
         }
@@ -31,6 +28,18 @@ public class State
         invSlopeCheck = setSlopeCheck(invSlopeCheck, -1);
         if(arrayCheck(rowCheck) == true || arrayCheck(colCheck) == true || arrayCheck(slopeCheck) == true || arrayCheck(invSlopeCheck) == true){
             return true;
+        }
+        return false;
+    }
+        public boolean arrayCheck(int[] numb){
+        for(int i = 0; i < numb.length - 3; i ++){
+            try{
+                if(numb[i] + numb[i + 1] + numb[i + 2] + numb[i + 3]  == (4 * this.getWhoseMove())){
+                    return true;   
+                } 
+            }catch(Exception e) {
+
+            }
         }
         return false;
     }
@@ -62,18 +71,6 @@ public class State
             }
         }
         return slopeCheck;
-    }
-    public boolean arrayCheck(int[] numb){
-        for(int i = 0; i < numb.length - 3; i ++){
-            try{
-                if(numb[i] + numb[i + 1] + numb[i + 2] + numb[i + 3]  == (4 * this.getWhoseMove())){
-                    return true;   
-                } 
-            }catch(Exception e) {
-
-            }
-        }
-        return false;
     }
 
     public boolean isTie() {
