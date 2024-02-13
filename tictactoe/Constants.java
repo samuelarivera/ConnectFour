@@ -30,7 +30,7 @@ public class Constants
     public static final int QUIT_PROGRAM = 11;
     
     // Strings
-    public static final String DIVIDER_STRING = "|---|---|---||---|---|---|---|";
+    public static final String DIVIDER_STRING = "|-1-|-2-|-3-||-4-|-5-|-6-|-7-|";
     public static final String BOARD_STRING = " | %s | %s | %s | %s | %s | %s | %s |";
     public static final String GET_PLAYER_NAME = "Player %s: What is your name? --- ";
     public static final String TITLE = "Thanks for playing Tic-Tac-Toe!";

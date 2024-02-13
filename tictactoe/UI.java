@@ -46,7 +46,7 @@ public class UI
         int col = 0;
         int checkCol = 1;
         try {
-            while (col <= 0 || col > Constants.BOARD_SIZE) {
+            while (col <= 0 || col > Constants.BOARD_SIZE + 1) {
                 System.out.printf(Constants.GET_COL_MOVE, getXOrO(whoseMove), getPlayerName(whoseMove, xName, oName));
                 checkCol = scanner.nextInt();
                 if (checkCol < 1 || checkCol > Constants.BOARD_SIZE + 1) {
